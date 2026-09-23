@@ -9,21 +9,21 @@ class ProductTemplate(models.Model):
         )
 
     td_length = fields.Float(
-            string='Length',
+            string='Length (ext)',
         )    
     td_width = fields.Float(
-            string='Width',
+            string='Width (ext)',
         )    
     td_height = fields.Float(
-            string='Height',
+            string='Height (ext)',
         )   
 
     td_weight = fields.Float(
-            string='Weight',
+            string='Weight (ext)',
         )                       
 
     td_volume = fields.Float(
-            string='Volume',
+            string='Volume (ext)',
         )         
 
     td_uom_weight = fields.Many2one(
