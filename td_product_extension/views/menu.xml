@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="td_manufacturer_act_window" model="ir.actions.act_window">
+        <field name="name">Manufacturer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.manufacturer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="td_product_extension_main_menu"
+            web_icon="td_product_extension,static/description/icon.png"
+            name="Product extension" sequence="300"/>
+
+    <menuitem id="td_manufacturer"
+        name="Manufacturer"
+        parent="td_product_extension_main_menu"
+        action="td_manufacturer_act_window"
+        sequence="10"/>
+
+</odoo>

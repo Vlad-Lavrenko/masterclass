@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="td_product_extension_product_variat_easy_edit_inherit_view_form" model="ir.ui.view">
+        <field name="name">td.product_extension.product.variant.esay.edit.inherit.view.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group>
+                    <group string="Dimensions">
+                        <field name="td_uom_dimension" string="Unit of Measure"/>
+                        <field name="td_length"/>
+                        <field name="td_width"/>
+                        <field name="td_height"/>
+                    </group>
+                    <group string="Weght, volume">
+                        <group class="o_row">
+                            <field name="td_weight"/>
+                            <field name="td_uom_weight" string="Unit of Measure"/>
+                        </group>    
+                        <group class="o_row">
+                            <field name="td_volume"/>
+                            <field name="td_uom_volume" string="Unit of Measure"/>
+                        </group>    
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="td_product_extension_product_product_inherit_view_form" model="ir.ui.view">
+        <field name="name">td.product_extension.product.product.inherit.view.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Extension" name="td_product_extension">
+                    <group>
+                        <group string="Dimensions">
+                            <field name="td_uom_dimension" string="Unit of Measure"/>
+                            <field name="td_length"/>
+                            <field name="td_width"/>
+                            <field name="td_height"/>
+                        </group>
+                        <group string="Weght, volume">
+                            <group class="o_row">
+                                <field name="td_weight"/>
+                                <field name="td_uom_weight" string="Unit of Measure"/>
+                            </group>    
+                            <group class="o_row">
+                                <field name="td_volume"/>
+                                <field name="td_uom_volume" string="Unit of Measure"/>
+                            </group>    
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="td_product_extension_product_template_inherit_view_form" model="ir.ui.view">
+        <field name="name">td.product_extension.product.template.inherit.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Extension" name="td_product_extension">
+                    <group>
+                        <field name="td_manufacturer_id"/>
+                    </group>
+                    <group>
+                        <group string="Dimensions">
+                            <field name="td_uom_dimension" string="Unit of Measure"/>
+                            <field name="td_length"/>
+                            <field name="td_width"/>
+                            <field name="td_height"/>
+                        </group>
+                        <group string="Weght, volume">
+                            <group class="o_row">
+                                <field name="td_weight"/>
+                                <field name="td_uom_weight" string="Unit of Measure"/>
+                            </group>    
+                            <group class="o_row">
+                                <field name="td_volume"/>
+                                <field name="td_uom_volume" string="Unit of Measure"/>
+                            </group>    
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='variants']/field[@name='attribute_line_ids']/tree/field[@name='attribute_id']" position="after">
+                <field name="td_make_variant"/>
+            </xpath>
+            <xpath expr="//field[@name='default_code']" position="attributes">
+                <attribute name="invisible">False</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

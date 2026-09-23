@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="td_manufacturer_view_tree" model="ir.ui.view">
+        <field name="name">td.manufacturer.tree</field>
+        <field name="model">td.manufacturer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="td_manufacturer_view_form" model="ir.ui.view">
+        <field name="name">td.manufacturer.form</field>
+        <field name="model">td.manufacturer</field>
+        <field name="arch" type="xml">
+            <form>
+                <header/>
+                <sheet>
+                    <div class="row">
+                        <group class="col">
+                            <field name="name"/>
+                            <field name="description" type="html"/>
+                        </group>
+                        <group class="col">
+                            <field name="image_1920" widget="image" class="oe_avatar" nolabel="1"/>
+                        </group>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
