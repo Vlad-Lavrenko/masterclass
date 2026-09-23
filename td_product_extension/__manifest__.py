@@ -1,6 +1,6 @@
 {
     'name': 'Product Extension',
-    'version': '17.0.1.0.7',
+    'version': '17.0.1.0.8',
     'summary': 'Product extension',
     'description': '',
     'author': 'ToDo',
