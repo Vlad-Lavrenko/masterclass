@@ -1,0 +1,31 @@
+<odoo>
+
+    <record id="td_marketplace_export_wizard_form" model="ir.ui.view">
+        <field name="name">td.marketplace.export.wizard.form</field>
+        <field name="model">td.marketplace.export.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Marketplace Data EXport Wizard">
+                <group>
+                    <field name="export_type" invisible="True"/>
+                    <field name="marketplace_id" options="{'no_create': True, 'no_edit':True}"/>
+                    <field name="comment"/>
+                </group>
+                <footer>
+                    <widget name='td_wizard_export_button' button_name="action_do_update" title="Do update" invisible="export_type != 'update'"/>
+                    <widget name='td_wizard_export_button' button_name="action_do_update_stock" title="Do update stock" invisible="export_type != 'update_stock'"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="td_data_export_wizard_from_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">Marketplace Data Export Wizard</field>
+        <field name="res_model">td.marketplace.export.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="domain">[('marketplace_id','=',active_id)]</field>
+        <field name="context">{'default_marketplace_id': active_id}</field>
+    </record>
+
+</odoo>

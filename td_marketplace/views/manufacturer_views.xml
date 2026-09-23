@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="td_marketplace_manufacturer_wizard_act_window" model="ir.actions.act_window">
+        <field name="name">Marketplace Manufacturer Wizard</field>
+        <field name="res_model">td.marketplace.manufacturer.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>            
+
+    <record id="td_marketplace_manufacturer_inherit_view_form" model="ir.ui.view">
+        <field name="name">td.marketplace.manufacturer.inherit.view.form</field>
+        <field name="model">td.manufacturer</field>
+        <field name="inherit_id" ref="td_product_extension.td_manufacturer_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Marketplaces">
+                    <group>
+                        <button 
+                            string="Add marketplace" 
+                            type="action" 
+                            name="%(td_marketplace_manufacturer_wizard_act_window)d" 
+                            class="btn btn-primary text-nowrap"
+                            context="{'default_manufacturer_id':active_id}"
+                            />
+                    </group>
+                    <field name="td_marketplace_ids" widget="one2many" string="">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                </group>
+
+                <group>
+                    <field name="td_marketplace_filed_ids" widget="one2many" string=""
+                        context="{'default_manufacturer_id': active_id}">                        
+                        <tree>
+                            <field name="marketplace_id"/>
+                        </tree>
+                    </field>
+                </group>
+
+            </xpath>
+        </field>
+    </record>
+
+    <record id="td_marketpalce_manufacturer_view_search" model="ir.ui.view">
+        <field name="name">td.marketplace.manufacturer.search</field>
+        <field name="model">td.marketplace.manufacturer</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="manufacturer_id"/>
+            </search>
+        </field>
+    </record>    
+
+    <record id="td_marketpalce_manufacturer_view_tree" model="ir.ui.view">
+        <field name="name">td.marketplace.manufacturer.tree</field>
+        <field name="model">td.marketplace.manufacturer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="marketplace_id"/>
+                <field name="manufacturer_id"/>
+                <field name="marketplace_code"/>
+                <field name="state"
+                    decoration-danger="state == 'to_process'"
+                    decoration-success="state == 'processed'"
+                    widget="badge"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="td_marketpalce_manufacturer_view_form" model="ir.ui.view">
+        <field name="name">td.marketplace.manufacturer.form</field>
+        <field name="model">td.marketplace.manufacturer</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_set_to_process" type="object"
+                            string="Set To Process" class="oe_highlight"
+                            invisible="state in ('to_process','to_process_stock')"/>
+                    <button name="action_set_processed" type="object"
+                            string="Set Processed" class="oe_highlight"
+                            invisible="state=='processed'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="to_process,processed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="marketplace_id" readonly="1"/>
+                        <field name="manufacturer_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_set_to_process_manufacturer" model="ir.actions.server">
+        <field name="name">Set to process</field>
+        <field name="model_id" ref="td_marketplace.model_td_marketplace_manufacturer"/>
+        <field name="binding_model_id" ref="td_marketplace.model_td_marketplace_manufacturer"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+        if records:
+            records.action_set_to_process()
+        </field>
+    </record>
+
+    <record id="action_set_processed_manufacturer" model="ir.actions.server">
+        <field name="name">Set processed</field>
+        <field name="model_id" ref="td_marketplace.model_td_marketplace_manufacturer"/>
+        <field name="binding_model_id" ref="td_marketplace.model_td_marketplace_manufacturer"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+        if records:
+            records.action_set_processed()
+        </field>
+    </record>
+
+</odoo>

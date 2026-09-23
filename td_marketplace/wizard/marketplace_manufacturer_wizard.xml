@@ -1,0 +1,19 @@
+<odoo>
+    <record id="td_marketplace_manufacturer_wizard_form" model="ir.ui.view">
+        <field name="name">td.marketplace.manufacturer.wizard.form</field>
+        <field name="model">td.marketplace.manufacturer.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Marketplace Manufacturer Wizard">
+                <group>
+                    <field name="available_marketplace_ids" invisible="1"/>
+                    <field name="manufacturer_id" readonly="1"/>
+                    <field name="marketplace_id" options="{'no_create': True, 'no_edit':True}"/>
+                </group>
+                <footer>
+                    <button string="Apply" type="object" name="action_apply" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

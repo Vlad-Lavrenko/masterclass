@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="td_sale_order_form_view" model="ir.ui.view">
+        <field name="name">td.sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='order_details']" position="inside">
+                <field name="td_marketplace_id"/>
+                <field name="td_marketplace_number"/>
+                <field name="td_marketplace_code"/>
+                <field name="td_marketplace_warning"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="td_sale_order_tree_view" model="ir.ui.view">
+        <field name="name">td.sale.order.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='state']" position="after">
+                <field name="td_marketplace_warning"/>
+                <field name="td_marketplace_id"/>
+                <field name="td_marketplace_number"/>
+                <field name="td_marketplace_code"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

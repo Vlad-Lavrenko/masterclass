@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="td_marketplace_product_field_form" model="ir.ui.view">
+        <field name="name">td.marketplace.product.field.form</field>
+        <field name="model">td.marketplace.product.field</field>
+        <field name="arch" type="xml">
+            <form string="Marketplace`s Product Field">
+                <group name="title">
+                    <field name="product_tmpl_id"/>
+                    <field name="marketplace_id" readonly="id!=False"/>
+                </group>
+            </form>
+        </field>            
+    </record>
+
+</odoo>

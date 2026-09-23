@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="td_partner_view_tree" model="ir.ui.view">
+        <field name="name">td.partner.tree</field>
+        <field name="model">td.marketplace.partner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="marketplace_id"/>
+                <field name="partner_id"/>
+                <field name="marketplace_code"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

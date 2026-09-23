@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="td_marketplace_product_product_inherit_view_form" model="ir.ui.view">
+        <field name="name">td.marketplace.product.product.inherit.view.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Marketplace settings" name="td_marketplace_settings">
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="td_marketplace_product_template_inherit_view_form" model="ir.ui.view">
+        <field name="name">td.marketplace.product.template.inherit.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Marketplace settings" name="td_marketplace_settings" invisible="not id">
+
+                    <group>
+                        <group string="Marketplaces">
+                            <group>
+                                <button 
+                                    string="Add marketplace" 
+                                    type="action" 
+                                    name="%(td_marketplace_offer_product_wizard_act_window)d" 
+                                    class="btn btn-primary text-nowrap"
+                                    context="{'default_product_id':active_id}"
+                                    />
+                            </group>
+                            <field name="td_marketplace_ids" widget="one2many" string="">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+
+                        </group>
+                        <group string="Marketplace's Category">
+                            <group>
+                                <button 
+                                    string="Add category" 
+                                    type="action" 
+                                    name="%(td_marketplace_category_product_wizard_act_window)d" 
+                                    class="btn btn-primary text-nowrap"
+                                    context="{'default_product_id':active_id}"
+                                    />
+                            </group>
+                            <!-- <field name="td_marketplace_category_ids" widget="one2many" string="" readonly="1"> -->
+                            <field name="td_marketplace_category_ids" widget="one2many" string="">
+                                <tree create="false" edit="false" delete="true">
+                                    <field name="marketplace_id"/>
+                                    <field name="category_id"/>
+                                </tree>  
+                            </field>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <field name="td_marketplace_filed_ids" widget="one2many" string=""
+                            context="{'default_product_tmpl_id': active_id}">                        
+                            <tree>
+                                <field name="marketplace_id"/>
+                            </tree>
+                        </field>
+                    </group>
+
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

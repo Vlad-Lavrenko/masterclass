@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="td_mc_res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">td.mc.res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="td_marketplace_connector_settings" string="Marketplace connector" name="td_marketplace">
+                    <block title="General" name="td_mc_setting_container">
+                        <setting id="td_mc_use_logging" help="Use logging">
+                            <field name="td_mc_use_logging"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

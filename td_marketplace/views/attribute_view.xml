@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="td_attribute_view_tree" model="ir.ui.view">
+        <field name="name">td.attribute.tree</field>
+        <field name="model">td.marketplace.attribute</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="marketplace_id"/>
+                <field name="attribute_id"/>
+                <field name="marketplace_code"/>
+                <field name="prefix"/>
+                <button name="action_upload_attribute" type="object" string="Upload" class="btn btn-link" icon="fa-refresh" invisible="marketplace_code!=False"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

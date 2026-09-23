@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="td_marketplace_view_tree" model="ir.ui.view">
+        <field name="name">td.marketplace.tree</field>
+        <field name="model">td.marketplace</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="td_marketplace_view_kanban" model="ir.ui.view">
+        <field name="name">td_marketplace_view.kanban</field>
+        <field name="model">td.marketplace</field>
+        <field name="arch" type="xml">
+            <kanban create="false" class="o_kanban_payment_acquirer o_kanban_dashboard">
+                <field name="name"/>
+                <field name="id"/>
+                <field name="image_128"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <t t-set="installed"
+                           t-value="record.active.value "/>
+                        <div>
+                            <div class="o_payment_acquirer_desc">
+                                <div class="o_kanban_image">
+                                    <img type="open"
+                                         t-att-src="kanban_image('td.marketplace', 'image_128', record.id.raw_value)"
+                                         alt="Acquirer"/>
+                                </div>
+                                <h3 class="mt4">
+                                    <t t-esc="record.name.value"/>
+                                </h3>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="td_category_from_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">Marketplace category</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.marketplace.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('marketplace_id','=',active_id)]</field>
+        <field name="context">{'default_marketplace_id': active_id}</field>
+    </record>
+
+    <record id="td_offer_from_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">Product Offer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('marketplace_id','=',active_id)]</field>
+        <field name="context">{'default_marketplace_id': active_id}</field>
+    </record>
+
+    <record id="td_incorrect_offer_from_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">Inctorrect Product Offer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_correct','=',False), ('marketplace_id','=',active_id)]</field>
+        <field name="context">{'default_marketplace_id': active_id}</field>
+    </record>
+
+    <record id="td_to_process_offer_from_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">To process Product Offer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','in',('to_process','to_process_all')), ('marketplace_id','=',active_id)]</field>
+        <field name="context">{'default_marketplace_id': active_id}</field>
+    </record>
+
+    <record id="td_to_process_stock_offer_from_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">To process Product Offer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','in',('to_process_stock','to_process_all')), ('marketplace_id','=',active_id)]</field>
+        <field name="context">{'default_marketplace_id': active_id}</field>
+    </record>
+
+    <record id="td_marketplace_attributes_from_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">Marketplace attributes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.marketplace.attribute</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('marketplace_id','=',active_id)]</field>
+        <field name="context">{'default_marketplace_id': active_id}</field>
+    </record>
+
+    <record id="td_marketplace_manufacturers_from_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">Marketplace manufacturers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.marketplace.manufacturer</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('marketplace_id','=',active_id)]</field>
+        <field name="context">{'default_marketplace_id': active_id}</field>
+    </record>
+
+    <record id="td_marketplace_partners_from_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">Marketplace partners</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.marketplace.partner</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('marketplace_id','=',active_id)]</field>
+        <field name="context">{'default_marketplace_id': active_id}</field>
+    </record>
+
+    <record id="td_marketplace_pricelist_from_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">Marketplace pricelists</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.marketplace.pricelist</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('marketplace_id','=',active_id)]</field>
+        <field name="context">{'default_marketplace_id': active_id}</field>
+    </record>
+
+    <record id="td_offer_wizard_act_window" model="ir.actions.act_window">
+        <field name="name">Marketplace Offer Wizard</field>
+        <field name="res_model">td.offer.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>            
+
+    <record id="td_marketplace_view_form" model="ir.ui.view">
+        <field name="name">td.marketplace.form</field>
+        <field name="model">td.marketplace</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_do_update" type="object"
+                            string="Do update" class="oe_highlight"
+                            invisible="to_process_offer_count + to_process_manufacturer_count == 0"/>
+                    <button name="action_do_update_stock" type="object"
+                            string="Do update stock" class="oe_highlight"
+                            invisible="to_process_stock_offer_count == 0"/>
+                    <button name="action_download_orders" type="object"
+                            string="Download orders" class="oe_highlight"
+                            invisible="auto_load_orders == False"/>
+                </header>
+                <sheet>
+                    <field name="to_process_manufacturer_count" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(td_category_from_marketplace_act_window)d"
+                                type="action" class="oe_stat_button"
+                                icon="fa-book icon">
+                            <div class="o_field_widget o_stat_info">
+                                <field name="category_count" widget="statinfo" nolabel="1"/>
+                                <span class="o_stat_text">Categories</span>
+                            </div>
+                        </button>
+
+                        <button name="%(td_marketplace_attributes_from_marketplace_act_window)d"
+                                type="action" class="oe_stat_button"
+                                icon="fa-book icon">
+                            <div class="o_field_widget o_stat_info">
+                                <field name="attribute_count" widget="statinfo" nolabel="1"/>
+                                <span class="o_stat_text">Attributes</span>
+                            </div>
+                        </button>
+
+                        <button name="%(td_marketplace_manufacturers_from_marketplace_act_window)d"
+                                type="action" class="oe_stat_button"
+                                icon="fa-book icon">
+                            <div class="o_field_widget o_stat_info">
+                                <field name="manufacturer_count" widget="statinfo" nolabel="1"/>
+                                <span class="o_stat_text">Manufacturers</span>
+                            </div>
+                        </button>
+
+                        <button name="%(td_marketplace_partners_from_marketplace_act_window)d"
+                                type="action" class="oe_stat_button"
+                                icon="fa-book icon">
+                            <div class="o_field_widget o_stat_info">
+                                <field name="partner_count" widget="statinfo" nolabel="1"/>
+                                <span class="o_stat_text">Partners</span>
+                            </div>
+                        </button>
+
+                        <button name="%(td_marketplace_pricelist_from_marketplace_act_window)d"
+                                type="action" class="oe_stat_button"
+                                icon="fa-book icon">
+                            <div class="o_field_widget o_stat_info">
+                                <field name="pricelist_count" widget="statinfo" nolabel="1"/>
+                                <span class="o_stat_text">Pricelist</span>
+                            </div>
+                        </button>
+
+                        <button name="%(td_offer_from_marketplace_act_window)d"
+                                type="action" class="oe_stat_button"
+                                icon="fa-cube icon">
+                            <div class="o_field_widget o_stat_info">
+                                <field name="offer_count" widget="statinfo" nolabel="1"/>
+                                <span class="o_stat_text">Offers</span>
+                            </div>
+                        </button>
+
+                        <button name="%(td_to_process_offer_from_marketplace_act_window)d"
+                                type="action" class="oe_stat_button"
+                                icon="fa-rss icon">
+                            <div class="o_field_widget o_stat_info">
+                                <field name="to_process_offer_count" widget="statinfo" nolabel="1"/>
+                                <span class="o_stat_text">To Process Offers</span>
+                            </div>
+                        </button>
+
+                        <button name="%(td_to_process_stock_offer_from_marketplace_act_window)d"
+                                type="action" class="oe_stat_button"
+                                icon="fa-rss icon">
+                            <div class="o_field_widget o_stat_info">
+                                <field name="to_process_stock_offer_count" widget="statinfo" nolabel="1"/>
+                                <span class="o_stat_text">To Process Stock Offers</span>
+                            </div>
+                        </button>
+
+                    </div>
+                    <group>
+                        <field name="id" invisible="True"/>
+                        <field name="name"/>
+                        <field name="code" readonly="id!=False"/>
+                    </group>
+                    <notebook>
+                        <page string="Settings" name="settings">
+                            <group groups="base.group_system">
+                                <group>
+                                    <field name="use_api"/>
+                                    <field name="template_id" invisible="use_api==True"/>
+                                    <field name="api_url" invisible="use_api==False"/>
+                                    <field name="api_login" invisible="use_api==False"/>
+                                    <field name="api_password" invisible="use_api==False"/>
+                                    <field name="api_token" invisible="use_api==False"/>
+                                    <field name="api_token_expires" invisible="use_api==False"/>
+                                </group>
+                                <group>
+                                    <field name="odoo_url" invisible="use_api==False"/>
+                                    <field name="marketplace_external_id" invisible="use_api==False"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Settings">
+                                    <field name="auto_load_orders"/>
+                                    <field name="order_sync"/>
+                                </group>
+                            </group>
+                            <group groups="base.group_system">
+                                <group string="Marketplace's settings">
+                                    <field name="language_id"/>
+                                    <field name="currency_id"/>
+                                    <field name="dimension_uom" string="Dimension UoM"/>
+                                    <field name="weght_uom" string="Weight UoM"/>
+                                </group>
+                                <group string="Marketplace's Language">
+                                    <field name="language_ids" string="" readonly="1">
+                                        <tree>
+                                            <field name="language_code"/>
+                                            <button name="unlink" type="object" icon="fa-trash" string="Delete"/>
+                                        </tree>  
+                                    </field>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Initialization" name="initialization">
+                            <group string="Initialization" name="initialization" groups="base.group_system">
+                                <button name="load_marketplace_settings"
+                                        string="Load settings" type="object"
+                                        class="btn btn-primary text-nowrap"/>
+                                <button name="load_marketplace_category"
+                                        string="Load category" type="object"
+                                        class="btn btn-primary text-nowrap"/>
+                                <button name="load_marketplace_language"
+                                        string="Load language" type="object"
+                                        class="btn btn-primary text-nowrap"/>
+                                <button name="load_marketplace_attribute"
+                                        string="Load attribute" type="object"
+                                        class="btn btn-primary text-nowrap"/>
+                                <button name="load_marketplace_manufacturer"
+                                        string="Load manufacturer" type="object"
+                                        class="btn btn-primary text-nowrap"/>
+                                <button name="load_marketplace_pricelist"
+                                        string="Load pricelist" type="object"
+                                        class="btn btn-primary text-nowrap"/>
+                                <button name="load_marketplace_product"
+                                        string="Load product" type="object"
+                                        class="btn btn-primary text-nowrap"/>
+                                <button name="load_marketplace_partner"
+                                        string="Load partner" type="object"
+                                        class="btn btn-primary text-nowrap"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,25 @@
+<odoo>
+    <record id="td_offer_wizard_form" model="ir.ui.view">
+        <field name="name">td.offer.wizard.form</field>
+        <field name="model">td.offer.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Marketplace Offer Wizard">
+                <group>
+                    <field name="marketplace_id" options="{'no_create': True, 'no_edit':True}"/>
+                </group>
+
+                <field name="product_line" mode="tree">
+                    <tree editable="both">
+                        <field name="check"/>
+                        <field name="product_id"/>
+                    </tree>
+                </field>
+
+                <footer>
+                    <button string="Apply" type="object" name="action_apply" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

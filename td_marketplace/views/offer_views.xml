@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="td_offer_view_search" model="ir.ui.view">
+        <field name="name">td.offer.search</field>
+        <field name="model">td.offer</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id"/>
+            </search>
+        </field>
+    </record>    
+    
+    <record id="td_offer_view_tree" model="ir.ui.view">
+        <field name="name">td.offer.tree</field>
+        <field name="model">td.offer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id"/>
+                <field name="product_variant_value_ids" widget="many2many_tags" readonly="1"/>
+                <field name="marketplace_id"/>
+                <field name="state"
+                    decoration-danger="state == 'to_process_all'"
+                    decoration-info="state == 'to_process'"
+                    decoration-warning="state == 'to_process_stock'"
+                    decoration-success="state == 'processed'"
+                    widget="badge"
+                />
+                <field name="marketplace_code"/>
+                <field name="marketplace_variant_code"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="td_offer_form" model="ir.ui.view">
+        <field name="name">td.offer.form</field>
+        <field name="model">td.offer</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_set_to_process_stock" type="object"
+                            string="Set To Process Stock" class="oe_highlight"
+                            invisible="state in ('to_process','to_process_stock','to_process_all')"/>
+                    <button name="action_set_to_process" type="object"
+                            string="Set To Process" class="oe_highlight"
+                            invisible="state in ('to_process','to_process_stock','to_process_all')"/>
+                    <button name="action_set_to_process_all" type="object"
+                            string="Set To Process" class="oe_highlight"
+                            invisible="state in ('to_process','to_process_stock','to_process_all')"/>
+                    <button name="action_set_processed" type="object"
+                            string="Set Processed" class="oe_highlight"
+                            invisible="state=='processed'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="to_process_stock,to_process,to_process_all,processed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="marketplace_id" readonly="1"/>
+                        <field name="product_tmpl_id"/>
+                    </group>
+                    <group invisible="product_variant_value_ids == False">
+                        <field name="product_id" readonly="1"/>
+                        <field name="product_variant_value_ids" widget="many2many_tags" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="marketplace_code"/>
+                        <field name="marketplace_variant_code"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="td_marketplace_offer_product_wizard_act_window" model="ir.actions.act_window">
+        <field name="name">Marketplace Offer Product Wizard</field>
+        <field name="res_model">td.marketplace.offer.product.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>            
+
+    <record id="action_set_to_process_stock" model="ir.actions.server">
+        <field name="name">Set to process stock</field>
+        <field name="model_id" ref="td_marketplace.model_td_offer"/>
+        <field name="binding_model_id" ref="td_marketplace.model_td_offer"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+        if records:
+            records.action_set_to_process_stock()
+        </field>
+    </record>
+
+    <record id="action_set_to_process" model="ir.actions.server">
+        <field name="name">Set to process</field>
+        <field name="model_id" ref="td_marketplace.model_td_offer"/>
+        <field name="binding_model_id" ref="td_marketplace.model_td_offer"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+        if records:
+            records.action_set_to_process()
+        </field>
+    </record>
+
+    <record id="action_set_to_process_all" model="ir.actions.server">
+        <field name="name">Set to process all</field>
+        <field name="model_id" ref="td_marketplace.model_td_offer"/>
+        <field name="binding_model_id" ref="td_marketplace.model_td_offer"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+        if records:
+            records.action_set_to_process_all()
+        </field>
+    </record>
+
+    <record id="action_set_processed" model="ir.actions.server">
+        <field name="name">Set processed</field>
+        <field name="model_id" ref="td_marketplace.model_td_offer"/>
+        <field name="binding_model_id" ref="td_marketplace.model_td_offer"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+        if records:
+            records.action_set_processed()
+        </field>
+    </record>
+
+</odoo>

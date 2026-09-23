@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="td_marketplace_act_window" model="ir.actions.act_window">
+        <field name="name">Marketplace</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.marketplace</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="td_offer_act_window" model="ir.actions.act_window">
+        <field name="name">Offer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">td.offer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="td_marketplace_connector_main_menu"
+              web_icon="td_marketplace,static/description/icon.png"
+              name="Marketplace Connector" sequence="300"/>
+
+    <menuitem id="td_marketplace"
+        name="Marketplace"
+        parent="td_marketplace_connector_main_menu"
+        action="td_marketplace_act_window"
+        sequence="10"/>
+
+    <menuitem id="td_offer"
+        name="Offer"
+        parent="td_marketplace_connector_main_menu"
+        action="td_offer_act_window"
+        sequence="30"/>
+
+</odoo>

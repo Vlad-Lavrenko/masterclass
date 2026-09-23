@@ -1,0 +1,20 @@
+<odoo>
+    <record id="td_marketplace_category_product_wizard_form" model="ir.ui.view">
+        <field name="name">td.marketplace.catefory.product.wizard.form</field>
+        <field name="model">td.marketplace.category.product.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Marketplace Category Wizard">
+                <group>
+                    <field name="available_marketplace_ids" invisible="1"/>
+                    <field name="product_id" readonly="1"/>
+                    <field name="marketplace_id" options="{'no_create': True, 'no_edit':True}"/>
+                    <field name="category_id" domain="[('marketplace_id','=',marketplace_id)]" options="{'no_create': True, 'no_edit':True}"/>
+                </group>
+                <footer>
+                    <button string="Apply" type="object" name="action_apply" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

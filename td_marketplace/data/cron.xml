@@ -1,0 +1,22 @@
+<odoo>
+    <record id="td_ir_cron_download_orders" model="ir.cron">
+        <field name="name">Download orders</field>
+        <field name="model_id" ref="model_td_marketplace"/>
+        <field name="state">code</field>
+        <field name="code">model.action_cron_download_orders()</field>
+        <field name="interval_number">10</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+    <record id="td_ir_cron_update_stock" model="ir.cron">
+        <field name="name">Update stock</field>
+        <field name="model_id" ref="model_td_marketplace"/>
+        <field name="state">code</field>
+        <field name="code">model.action_cron_update_stock()</field>
+        <field name="interval_number">10</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+    
+</odoo>

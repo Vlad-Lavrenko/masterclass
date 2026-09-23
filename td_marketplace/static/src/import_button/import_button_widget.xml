@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template>
+
+    <t t-name="td_marketplace.WizardImportButton">
+        <button t-on-click="onClick" class="btn btn-primary" type="button" t-att-name="props.method" t-att-title="props.title">
+            <span>Import all </span>
+        </button>
+    </t>
+
+</template>

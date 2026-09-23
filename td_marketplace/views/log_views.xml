@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="td_marketplace_log_view_tree" model="ir.ui.view" >
+        <field name="name">td.marketplace.log.tree</field>
+        <field name="model">td.marketplace.log</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="marketplace_id" optional="show"/>
+                <field name="called_method" optional="show"/>
+                <field name="create_date" optional="show"/>
+                <field name="name" optional="hide"/>
+                <field name="params" optional="hide"/>
+                <field name="headers" optional="hide"/>
+                <field name="error" optional="show"/>
+                <field name="method" optional="hide"/>
+                <field name="code" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="td_marketplace_log_view_form" model="ir.ui.view">
+        <field name="name">td.marketplace.log.form</field>
+        <field name="model">td.marketplace.log</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <group>
+                    <field name="marketplace_id"/>
+                </group>
+                <group>
+                    <group>
+                        <field name="response" widget="ace" options="{'mode': 'python'}"/>
+                        <field name="response_headers" widget="ace" options="{'mode': 'python'}"/>
+                    </group>
+                    <group>
+                        <field name="name"/>
+                        <field name="create_date"/>
+                        <field name="called_method"/>
+                        <field name="json" widget="ace" options="{'mode': 'python'}"/>
+                        <field name="params" widget="ace" options="{'mode': 'python'}"/>
+                        <field name="headers" widget="ace" options="{'mode': 'python'}"/>
+                        <field name="error"/>
+                        <field name="method"/>
+                        <field name="code"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="td_marketplace_log_view_search" model="ir.ui.view">
+        <field name="name">td.marketplace.log.search</field>
+        <field name="model">td.marketplace.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="marketplace_id"/>
+                <field name="name"/>
+                <field name="called_method"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="td_marketplace_log_action_window" model="ir.actions.act_window">
+        <field name="name">Log</field>
+        <field name="res_model">td.marketplace.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="td_marketplace_log"
+        name="Log"
+        parent="td_marketplace_connector_main_menu"
+        action="td_marketplace_log_action_window"
+        sequence="30"/>
+
+</odoo>
