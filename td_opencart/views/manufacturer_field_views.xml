@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="td_opencart_marketplace_manufacturer_field_form" model="ir.ui.view">
+        <field name="name">td.opencart.marketplace.manufacturer.field.form</field>
+        <field name="model">td.marketplace.manufacturer.field</field>
+        <field name="inherit_id" ref="td_marketplace.td_marketplace_manufacturer_field_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='title']" position="after">
+                <group name="opencart" string="Opencart">
+                    <field name="oc_meta_title"></field>
+                    <field name="oc_meta_description"></field>
+                    <field name="oc_meta_keywords"></field>
+                </group>
+            </xpath>
+        </field>            
+    </record>
+
+</odoo>

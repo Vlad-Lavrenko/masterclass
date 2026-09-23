@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="td_marketplace_product_template_inherit_view_form" model="ir.ui.view">
+        <field name="name">td.marketplace.product.template.inherit.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='td_marketplace_filed_ids']/tree" position="inside">
+                <field name="oc_date_available"/>
+                <field name="oc_seo_url"/>
+                <field name="oc_meta_description"/>
+                <field name="oc_meta_keywords"/>
+                <field name="oc_meta_title"/>
+                <field name="oc_tag"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
